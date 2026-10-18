@@ -18,24 +18,16 @@ The five highest-ranked CAPEC IDs form the predicted multilabel set. The CSV
 metrics include micro, macro, weighted, and sample precision/recall/F1, sample
 Jaccard, Hamming loss, exact match, Hit@1, and Hit@5.
 
-Run the existing method outputs as a standalone Slurm job:
+Run the comparison from the repository root after generating all five method
+outputs:
 
 ```bash
-cd /home/gurleen/paper/methodology/03_keyword_making
-mkdir -p batch_run/logs
-sbatch batch_run/cosine_top5.sbatch
-```
-
-Alternatively, submit the equivalent evaluation batch file:
-
-```bash
-mkdir -p /home/gurleen/paper/methodology/03_keyword_making/evaluation/logs
-sbatch /home/gurleen/paper/methodology/03_keyword_making/evaluation/run_evaluation.sbatch
+python 03_keyword_making/evaluation/evaluate_all_methods.py
 ```
 
 The main result is written to:
 
-`outputs/evaluation/minilm_cosine_top5/comparison_summary.csv`
+`03_keyword_making/outputs/evaluation/minilm_cosine_top5/comparison_summary.csv`
 
 Each method also gets `metrics.csv` and prediction CSVs for the training,
 validation, and testing splits.

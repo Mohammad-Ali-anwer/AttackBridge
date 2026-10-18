@@ -23,11 +23,11 @@ SAVED_KEYWORD_DIR = STAGE03_DIR / "outputs" / "keybert_modified"
 KEYWORD_MODULE_PATH = STAGE03_DIR / "methods" / "keybert_modified.py"
 STAGE02_DATASET_PATH = METHODOLOGY_DIR / "02_preprocessing" / "dataset.csv"
 OUR_APPROACH_MODULE_PATH = EVALUATION_DIR / "our_approch.py"
-LATEST_MODEL_POINTERS = (
-    EVALUATION_DIR / "batch_run" / "outputs" / "combined"
-    / "latest_our_approach_keywords_run.txt",
-    EVALUATION_DIR / "outputs" / "combined"
-    / "latest_our_approach_keywords_run.txt",
+LATEST_MODEL_POINTER = (
+    EVALUATION_DIR
+    / "outputs"
+    / "combined"
+    / "latest_our_approach_keywords_run.txt"
 )
 BUNDLED_MODEL_DIR = APP_DIR / "models" / "our_approach"
 BUNDLED_SENTENCE_ENCODER = BUNDLED_MODEL_DIR / "sentence_encoder"
@@ -114,15 +114,14 @@ def _resolve_model_path(explicit: str | None = None) -> Path:
         if path.is_file():
             path = Path(path.read_text(encoding="utf-8").strip()).expanduser().resolve()
         return path
-    for pointer in LATEST_MODEL_POINTERS:
-        if pointer.is_file():
-            return Path(
-                pointer.read_text(encoding="utf-8").strip()
-            ).expanduser().resolve()
+    if LATEST_MODEL_POINTER.is_file():
+        return Path(
+            LATEST_MODEL_POINTER.read_text(encoding="utf-8").strip()
+        ).expanduser().resolve()
     raise FileNotFoundError(
-        "No completed keyword-aware Our Approach run is registered. Run "
-        f"{EVALUATION_DIR / 'batch_run' / 'submit_grid_evaluations.sh'} first, "
-        "or set CAPEC_UI_MODEL_PATH to a completed "
+        "No completed keyword-aware Our Approach run is registered. Train "
+        "the Stage-04 models described in 04_evaluation/README.md, or set "
+        "CAPEC_UI_MODEL_PATH to a completed "
         "our_approach_keywords_* run directory."
     )
 

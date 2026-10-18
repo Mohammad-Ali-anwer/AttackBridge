@@ -70,25 +70,40 @@ All CAPEC evaluators use the union of the 559 catalog IDs from
 splits, followed by `CAPEC-noID`. The current fixed splits add no out-of-catalog
 IDs, giving a consistent 560-column evaluation space.
 
-Run the complete three-job comparison with:
+Run the models from the repository root after Stage 03 has created the fixed
+split files. The commands below show the full baseline-to-fusion order; these
+training runs are resource-intensive, so run them individually and ensure the
+previous stage has completed successfully before starting dependent models.
 
 ```bash
-bash /home/gurleen/paper/methodology/04_evaluation/batch_run/submit_all.sh
+python 04_evaluation/CVE_to_CWE/NN_1way.py
+python 04_evaluation/CVE_to_CWE/NN_fine_tune.py
+python 04_evaluation/CVE_to_CWE/NN_keywords.py
+python 04_evaluation/CVE_to_CWE/NN_fine_tune_keywords.py
+python 04_evaluation/NN.py
+python 04_evaluation/NN_fine_tune.py
+python 04_evaluation/NN_keywords.py
+python 04_evaluation/NN_fine_tune_keywords.py
+python 04_evaluation/CGDPF.py
+python 04_evaluation/CGDPF_keywords.py
+python 04_evaluation/rae_xmc.py
+python 04_evaluation/rae_xmc_keywords.py
+python 04_evaluation/our_approach.py
+python 04_evaluation/our_approach_keywords.py
+python 04_evaluation/collect_results.py
 ```
 
-The helper submits three jobs: CWE and direct CAPEC may run independently, and
-the fusion job starts only after both succeed. Each job requests one GPU, four
-CPU cores, 32 GB RAM, and at most 48 hours. Models within each job run
-sequentially. Batch artifacts are isolated under `batch_run/outputs/`, and
-every model has separate stdout/stderr under `batch_run/logs/`. At completion,
-`collect_results.py` writes `batch_run/outputs/model_results_summary.csv`.
-Its winner flag and rank are based on validation Micro-F1; test metrics remain
-the final unbiased report. The summary publishes exactly two final Our
-Approach rows (`our_approach` and `our_approach_keywords`); calibrated RAE and
-original-hybrid branches remain available inside each run as diagnostics but
-are not counted as additional models. The collector also rejects an RAE
-directory while an in-place training run is incomplete, preventing validation
-metrics from one execution being combined with test metrics from another.
+The direct CAPEC and CWE baseline models can be trained independently. CGDPF
+requires the corresponding direct CAPEC and CWE checkpoints; each Our
+Approach variant requires its matching CGDPF and RAE-XMC artifacts. At
+completion, `collect_results.py` writes
+`04_evaluation/outputs/model_results_summary.csv`. Its winner flag and rank
+are based on validation Micro-F1; test metrics remain the final unbiased
+report. The summary publishes exactly two final Our Approach rows
+(`our_approach` and `our_approach_keywords`); calibrated RAE and original
+hybrid branches remain available inside each run as diagnostics but are not
+counted as additional models. The collector rejects incomplete RAE-XMC runs
+to prevent results from different executions from being combined.
 
-Interactive execution still defaults to `outputs/`. All Stage-04 programs
-honor `EVALUATION_OUTPUT_ROOT` when a different result location is needed.
+All Stage-04 programs write to `04_evaluation/outputs/` by default. Set
+`EVALUATION_OUTPUT_ROOT` to use a different output directory.

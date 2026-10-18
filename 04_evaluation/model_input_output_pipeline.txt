@@ -645,10 +645,10 @@ NN + keyword benchmarks                    |
                                       test metrics + CSV/JSON
 
 
-11. WHAT MUST EXIST BEFORE RUNNING THE FINAL SBATCH
+11. REQUIRED INPUTS AND MODEL EXECUTION ORDER
 ===================================================
 
-The three batch files require these source files before they start:
+Stage 04 requires these source files before model training:
 
   ../01_cwe_capec_ground_truth/CWE_MAPPED.csv
   ../01_cwe_capec_ground_truth/capec_relationships.csv
@@ -662,15 +662,9 @@ including both fine-tuned variants. The dependent third job trains RAE-XMC;
 evaluates both CGDPF cases; and evaluates description-only and keyword-aware
 Our Approach.
 
-Submit the isolated batch run with:
-
-  bash /home/gurleen/paper/methodology/04_evaluation/batch_run/submit_all.sh
-
-Each Slurm request is one GPU, 4 CPU cores, 32 GB RAM, and a two-day limit in
-the torchgpu Conda environment. Models within each file run sequentially. The
-fusion job uses an afterok dependency on both baseline jobs. Results go to
-batch_run/outputs, while group and per-model stdout/stderr files go to
-batch_run/logs.
+Run the Stage-04 Python entry points directly from the repository root, in the
+dependency order documented in README.md. Outputs are written to
+04_evaluation/outputs.
 
 
 12. FROM-SCRATCH ORDER INCLUDING ALL BENCHMARKS
@@ -681,7 +675,8 @@ If none of the checkpoints exist, the complete logical order is:
   A. Run Stage 01 ground-truth generation.
   B. Run Stage 02 preprocessing to create dataset.csv.
   C. Run Stage 03 KeyBERT Modified and verify its three final split files.
-  D. Run batch_run/submit_all.sh; it trains and evaluates the full model matrix.
+  D. Train and evaluate the Stage-04 models in dependency order; collect their
+     results after all required runs finish.
 
 
 13. INFERENCE OUTPUT USED BY 05_UI

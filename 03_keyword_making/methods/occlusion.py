@@ -38,14 +38,10 @@ def collapse_consecutive_duplicate_tokens(text):
 # PROJECT PATHS
 # ============================================================
 
-# /home/gurleen/paper/methodology/03_keyword_making/methods
 SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 
-# /home/gurleen/paper/methodology/03_keyword_making
 PROJECT_DIR = os.path.dirname(SCRIPT_DIR)
-
-# /home/gurleen/paper
-PAPER_DIR = os.path.dirname(os.path.dirname(PROJECT_DIR))
+REPO_ROOT = os.path.dirname(PROJECT_DIR)
 
 # A batch job can redirect every method into one self-contained run folder.
 # When unset, standalone runs keep using PROJECT_DIR/outputs.
@@ -207,11 +203,6 @@ def run_hyperparameter_tuning():
 print("Python:", sys.executable)
 print("CUDA available:", torch.cuda.is_available())
 print("GPU count:", torch.cuda.device_count())
-print(
-    "Slurm job:",
-    os.environ.get("SLURM_JOB_ID", "not running under Slurm")
-)
-print("Current folder:", os.getcwd())
 
 
 # ============================================================
@@ -219,22 +210,19 @@ print("Current folder:", os.getcwd())
 # ============================================================
 
 DATASET_PATH = os.path.join(
-    PAPER_DIR,
-    "methodology",
+    REPO_ROOT,
     "02_preprocessing",
     "dataset.csv"
 )
 
 CWE_PATH = os.path.join(
-    PAPER_DIR,
-    "methodology",
+    REPO_ROOT,
     "01_cwe_capec_ground_truth",
     "cwe_final.csv"
 )
 
 CAPEC_PATH = os.path.join(
-    PAPER_DIR,
-    "methodology",
+    REPO_ROOT,
     "01_cwe_capec_ground_truth",
     "3000_capec.csv"
 )

@@ -1,4 +1,4 @@
-"""Shared output locations for Stage-04 interactive and batch runs."""
+"""Shared output locations for Stage-04 experiment runs."""
 
 from __future__ import annotations
 

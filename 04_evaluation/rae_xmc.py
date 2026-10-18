@@ -132,7 +132,7 @@ GROUND_TRUTH_DIR = METHODOLOGY_DIR / "01_cwe_capec_ground_truth"
 CAPEC_REL_PATH = GROUND_TRUTH_DIR / "capec_relationships.csv"
 CAPEC_CATALOG_PATH = GROUND_TRUTH_DIR / "3000_capec.csv"
 
-# Fixed names make downstream model paths stable across Slurm jobs.
+# Fixed names make downstream model paths stable across dependent runs.
 OUTPUT_DIR = OUTPUT_ROOT / "RAE_XMC"
 KEYWORD_OUTPUT_DIR = OUTPUT_ROOT / "RAE_XMC_keywords"
 SMOKE_OUTPUT_DIR = OUTPUT_ROOT / "RAE_XMC_smoke_test"

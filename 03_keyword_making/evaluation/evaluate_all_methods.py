@@ -18,7 +18,7 @@ only ``keyphrases`` is used to retrieve CAPECs.
 
 import os
 
-# Keep CPU use explicit and consistent in interactive and Slurm runs.
+# Keep CPU use explicit and consistent across standalone runs.
 DEFAULT_CPU_THREADS = "16"
 CPU_THREAD_SETTING = os.environ.get(
     "KEYWORD_EVAL_CPU_THREADS",
@@ -65,9 +65,9 @@ CAPEC_CATALOG_PATH = (
     / "3000_capec.csv"
 )
 
-BATCH_OUTPUT_ROOT = os.environ.get("KEYWORD_MAKER_OUTPUT_ROOT")
-if BATCH_OUTPUT_ROOT:
-    METHOD_OUTPUTS_DIR = Path(BATCH_OUTPUT_ROOT).expanduser().resolve()
+CUSTOM_OUTPUT_ROOT = os.environ.get("KEYWORD_MAKER_OUTPUT_ROOT")
+if CUSTOM_OUTPUT_ROOT:
+    METHOD_OUTPUTS_DIR = Path(CUSTOM_OUTPUT_ROOT).expanduser().resolve()
 else:
     METHOD_OUTPUTS_DIR = PROJECT_DIR / "outputs"
 

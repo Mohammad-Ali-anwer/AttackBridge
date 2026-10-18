@@ -24,13 +24,12 @@ encoder when available. You can select another completed keyword-aware run
 by setting `CAPEC_UI_MODEL_PATH` to a directory such as:
 
 ```text
-/home/gurleen/paper/methodology/04_evaluation/outputs/combined/our_approach_keywords_YYYYmmdd_HHMMSS
+04_evaluation/outputs/combined/our_approach_keywords_YYYYmmdd_HHMMSS
 ```
 
 By default, the UI reads
-`04_evaluation/batch_run/outputs/combined/latest_our_approach_keywords_run.txt`,
-with the equivalent interactive-output pointer as a fallback. It reads alpha,
-beta, and the final threshold directly from that run's
+`04_evaluation/outputs/combined/latest_our_approach_keywords_run.txt`. It reads
+alpha, beta, and the final threshold directly from that run's
 `fusion_parameters.json`. The UI calculates fresh CWE, direct-CAPEC, mapping,
 RAE-XMC, and final fusion scores for every request; it does not look up stored
 test predictions or hard-code weights.
@@ -82,8 +81,7 @@ never provided to the model or used to calculate prediction scores.
 Start the UI:
 
 ```bash
-cd /home/gurleen/paper/methodology/05_UI
-/home/gurleen/miniconda3/envs/torchgpu/bin/python server.py
+python 05_UI/server.py
 ```
 
 Open <http://127.0.0.1:8000>. Use `CAPEC_UI_DEVICE` to select `cpu`, `cuda`, or

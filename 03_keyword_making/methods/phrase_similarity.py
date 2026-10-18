@@ -29,27 +29,24 @@ from tqdm import tqdm
 
 SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 PROJECT_DIR = os.path.dirname(SCRIPT_DIR)
-PAPER_DIR = os.path.dirname(os.path.dirname(PROJECT_DIR))
+REPO_ROOT = os.path.dirname(PROJECT_DIR)
 OUTPUTS_ROOT = os.path.abspath(os.environ.get(
     "KEYWORD_MAKER_OUTPUT_ROOT",
     os.path.join(PROJECT_DIR, "outputs")
 ))
 
 DATASET_PATH = os.path.join(
-    PAPER_DIR,
-    "methodology",
+    REPO_ROOT,
     "02_preprocessing",
     "dataset.csv"
 )
 CWE_PATH = os.path.join(
-    PAPER_DIR,
-    "methodology",
+    REPO_ROOT,
     "01_cwe_capec_ground_truth",
     "cwe_final.csv"
 )
 CAPEC_PATH = os.path.join(
-    PAPER_DIR,
-    "methodology",
+    REPO_ROOT,
     "01_cwe_capec_ground_truth",
     "3000_capec.csv"
 )
@@ -2010,7 +2007,6 @@ def run_pipeline(config):
     print("Python:", sys.executable)
     print("CUDA available:", torch.cuda.is_available())
     print("GPU count:", torch.cuda.device_count())
-    print("Slurm job:", os.environ.get("SLURM_JOB_ID", "not under Slurm"))
 
     if not torch.cuda.is_available():
         raise RuntimeError("No CUDA GPU is visible. This method requires one GPU.")

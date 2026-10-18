@@ -2,7 +2,7 @@
 # FINAL CVE -> MULTI-LABEL CAPEC CLASSIFICATION
 # Uses:
 # - fixed training/validation/testing files from stage 03
-# - the GPU made visible by Slurm
+# - an available GPU
 # - MiniLM embeddings + MLP classifier
 # - BCEWithLogitsLoss
 # - threshold tuning on validation set
@@ -74,7 +74,7 @@ os.makedirs(OUTPUT_DIR, exist_ok=True)
 
 
 # ============================================================
-# 2. GPU SELECTED BY SLURM
+# 2. DEVICE SELECTION
 # ============================================================
 
 DEVICE = "cuda:0" if torch.cuda.is_available() else "cpu"

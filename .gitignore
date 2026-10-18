@@ -17,17 +17,28 @@ __pycache__/
 *.npy
 *.npz
 
-# SLURM / execution logs
+# Execution logs
 *.out
 *.err
 *.log
 
 # Generated experiment outputs
 03_keyword_making/outputs/
+04_evaluation/outputs/
 
 # Cache
 .cache/
 .ipynb_checkpoints/
+
+# Local Python environments
+.venv/
+venv/
+
+# Editors and operating systems
+.DS_Store
+.idea/
+.vscode/
+*.swp
 
 # Temporary files
 temp.txt
@@ -37,14 +48,5 @@ temp.txt
 .env
 .env.*
 
-# Evaluation generated outputs
-04_evaluation/batch_run/outputs/
-
 # Trained UI models
 05_UI/models/
-
-# Model/checkpoint files
-*.pt
-*.pth
-*.npy
-*.npz

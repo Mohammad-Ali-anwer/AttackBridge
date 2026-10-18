@@ -40,27 +40,24 @@ from tqdm import tqdm
 
 SCRIPT_DIR = Path(__file__).resolve().parent
 PROJECT_DIR = SCRIPT_DIR.parent
-PAPER_DIR = PROJECT_DIR.parents[1]
+REPO_ROOT = PROJECT_DIR.parent
 OUTPUTS_ROOT = Path(os.environ.get(
     "KEYWORD_MAKER_OUTPUT_ROOT",
     PROJECT_DIR / "outputs"
 )).expanduser().resolve()
 
 DATASET_PATH = (
-    PAPER_DIR
-    / "methodology"
+    REPO_ROOT
     / "02_preprocessing"
     / "dataset.csv"
 )
 CWE_PATH = (
-    PAPER_DIR
-    / "methodology"
+    REPO_ROOT
     / "01_cwe_capec_ground_truth"
     / "cwe_final.csv"
 )
 CAPEC_PATH = (
-    PAPER_DIR
-    / "methodology"
+    REPO_ROOT
     / "01_cwe_capec_ground_truth"
     / "3000_capec.csv"
 )
