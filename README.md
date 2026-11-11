@@ -4,8 +4,6 @@
 
 NVD tags vulnerabilities with weaknesses (CWE) but almost never with the attack patterns (CAPEC) that describe *how* they can be exploited. AttackBridge predicts the relevant CAPEC attack patterns directly from a CVE's text, ranked with confidence scores.
 
-> **Status:** Research paper in preparation.
-> **Authors:** Mohammad Ali, [co-authors], Dr. Geeta (IIT Ropar)
 
 ## Results
 
